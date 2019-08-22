@@ -1,0 +1,33 @@
+package com.javapractice.prueba.rest.controller;
+
+import com.javapractice.prueba.model.Player;
+import com.javapractice.prueba.service.PlayerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RequestMapping("/player")
+@RestController
+public class PlayerRestController {
+
+    @Autowired
+    private PlayerService playerService;
+    /*esta conectando el servicio con el controlador? */
+
+    @GetMapping
+    public List <Player> findall () {
+        return playerService.findall();
+    }
+
+    @GetMapping ("/{id}") // aca le dice que cualquier cosa que vaya despues de la barr aca es un id
+    public Player findPlayerbyId(@PathVariable ("id") Long id) {
+        //aca arriba con el PathVariable setea el id, lo que viene de la linea de arriba lo poone aca?
+        return playerService.findbyId(id).get();
+
+    }
+
+}
