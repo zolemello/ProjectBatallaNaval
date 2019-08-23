@@ -23,7 +23,7 @@ public class PlayerRestController {
         return playerService.findall();
     }
 
-    @GetMapping ("/{id}") // aca le dice que cualquier cosa que vaya despues de la barr aca es un id
+    @GetMapping ("/{id}") // aca le dice que cualquier cosa que vaya despues de la barra que es un id
     public Player findPlayerbyId(@PathVariable ("id") Long id) {
         //aca arriba con el PathVariable setea el id, lo que viene de la linea de arriba lo poone aca?
         return playerService.findbyId(id).get();
