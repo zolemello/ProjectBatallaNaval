@@ -10,7 +10,7 @@ public class PruebaApplication {
 
 
 	public static void main(String[] args) {
-		Game juego1 = new Game();
+
 		SpringApplication.run(PruebaApplication.class, args);
 	}
 
