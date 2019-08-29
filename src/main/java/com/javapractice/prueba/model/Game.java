@@ -15,12 +15,18 @@ public class Game {
     private Long id;
     @NotNull
     @NotEmpty
-    private Date creationDate;
+    //private Date creationDate;
     //Date es el tipo de dato de creationDate
-
+    private Date creationDate = new Date();
 
     public Game() {
+
     }
+
+    public Game (Date date) {
+        this.creationDate = date;
+    }
+
 
 
     public Game(Long id, Date creationDate) {

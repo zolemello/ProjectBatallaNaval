@@ -17,7 +17,11 @@ import java.util.List;
         @Autowired
         private SalvoService salvoService;
 
-        @GetMapping
+     public SalvoRestController(SalvoService salvoService) {
+         this.salvoService = salvoService;
+     }
+
+     @GetMapping
         public List<Salvo> findall() {
             return (List<Salvo>) SalvoService.findall();
         }
