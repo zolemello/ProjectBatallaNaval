@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Entity
+@Entity //Una entidad es una tabla de una base de datos.
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

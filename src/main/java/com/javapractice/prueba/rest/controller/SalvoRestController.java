@@ -23,7 +23,7 @@ import java.util.List;
 
      @GetMapping
         public List<Salvo> findall() {
-            return (List<Salvo>) SalvoService.findall();
+            return salvoService.findall();
         }
 
         @GetMapping("/{id}")

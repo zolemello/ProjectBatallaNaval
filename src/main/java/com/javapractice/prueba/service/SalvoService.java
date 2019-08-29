@@ -10,16 +10,17 @@ import java.util.Optional;
 
 
 
-    @Service
+@Service
     public class SalvoService {
-        @Autowired
-        private SalvoRepository salvoRepository;
 
-        public Optional<Salvo> findbyId(Long id) {
+      @Autowired
+      private SalvoRepository salvoRepository;
+
+       public Optional<Salvo> findbyId(Long id) {
             return salvoRepository.findById(id);
         }
 
-        public static List<Salvo> findall() {
+      public List<Salvo> findall() {
             return salvoRepository.findAll();
         }
     }
