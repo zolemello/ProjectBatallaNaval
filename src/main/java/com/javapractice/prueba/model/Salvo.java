@@ -1,9 +1,6 @@
 package com.javapractice.prueba.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Salvo {
@@ -12,6 +9,7 @@ public class Salvo {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id; //A database-generated ID, as with Ship
+        @ManyToOne
         private GamePlayer gamePlayerId; // A GamePlayer
         private Integer turnNumber; //A turn number
         private String locations;  //A list of locations

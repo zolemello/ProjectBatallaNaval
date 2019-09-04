@@ -1,9 +1,8 @@
-package com.codeoftheweb.salvo.service;
+package com.javapractice.prueba.service;
 
 
 import com.javapractice.prueba.model.Ship;
 import com.javapractice.prueba.repository.ShipRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

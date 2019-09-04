@@ -20,4 +20,10 @@ public class PlayerService {
     public List<Player> findall() {
      return playerRepository.findAll();
     }
+
+    public Player createPlayer(Player player) {
+        return playerRepository.save(player);
+    }
+
+    
 }

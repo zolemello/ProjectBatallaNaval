@@ -35,7 +35,7 @@ $(function() {
           'Content-Type': 'application/json'
       },
       dataType: "text",
-      url: "/player",
+      url: "/player", //Le "pega" a la url con el metodo postmapping que hicimos en PlayRestController
       data: JSON.stringify({ "userName": userName })
     })
     .done(function( ) {

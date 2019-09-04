@@ -3,10 +3,7 @@ package com.javapractice.prueba.rest.controller;
 import com.javapractice.prueba.model.Player;
 import com.javapractice.prueba.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +24,12 @@ public class PlayerRestController {
     public Player findPlayerbyId(@PathVariable ("id") Long id) {
         //aca arriba con el PathVariable setea el id, lo que viene de la linea de arriba lo poone aca?
         return playerService.findbyId(id).get();
-
     }
+
+    /*@PostMapping // esto crea ...algo VER ESTO
+    public Player createPlayer(@RequestBody Player player) {
+        return playerService.createPlayer();
+    }*/
+
 
 }

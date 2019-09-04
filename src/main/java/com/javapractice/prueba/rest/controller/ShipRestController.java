@@ -2,7 +2,7 @@ package com.javapractice.prueba.rest.controller;
 
 
 import com.javapractice.prueba.model.Ship;
-
+import com.javapractice.prueba.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class ShipRestController {
     @Autowired
-    private com.codeoftheweb.salvo.service.ShipService shipService;
+    private ShipService shipService;
 
     @GetMapping
     public List<Ship> findAll() {
