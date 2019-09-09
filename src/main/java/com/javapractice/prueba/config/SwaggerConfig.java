@@ -1,5 +1,6 @@
 package com.javapractice.prueba.config;
 
+/*
 
 import com.google.common.collect.Lists;
 import org.slf4j.Logger;
@@ -32,6 +33,8 @@ public class SwaggerConfig {
      * Configuracion de swagger
      *
      * */
+
+/*
     @Bean
     public Docket swaggerSpringfoxDocket() {
         log.debug("Starting Swagger");
@@ -76,7 +79,9 @@ public class SwaggerConfig {
     /*
      * Configuro que al autenticarme, dentro del geader va a meter un header Authorization con el valor que inserte
      * */
-    private ApiKey apiKey() {
+
+
+  /*  private ApiKey apiKey() {
         return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
     }
 
@@ -84,7 +89,9 @@ public class SwaggerConfig {
     /*
      * Configuro el contexto de seguridad y le seteo que todas las apis (Debido al /*) tiene que authenticarse.
      * */
-    private SecurityContext securityContext() {
+
+
+  /*private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
                 .forPaths(regex(DEFAULT_INCLUDE_PATTERN))
@@ -100,3 +107,4 @@ public class SwaggerConfig {
                 new SecurityReference("JWT", authorizationScopes));
     }
 }
+*/

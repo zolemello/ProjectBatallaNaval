@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/game")
+@RequestMapping("api/game")
 @RestController
 public class GameRestController {
 
@@ -27,4 +27,6 @@ public class GameRestController {
 
         return gameService.findbyId(id).get();
     }
+
+    // en los controllers tengo la informacion, aca deberia  tener los juegos
 }
