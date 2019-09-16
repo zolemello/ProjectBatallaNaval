@@ -33,7 +33,8 @@ import java.util.List;
     /*@PostMapping // esto crea ...algo VER ESTO
     public Player createPlayer(@RequestBody Player player) {
         return playerService.createPlayer();
-    }*/
+    }
+    */
 
 
     }
