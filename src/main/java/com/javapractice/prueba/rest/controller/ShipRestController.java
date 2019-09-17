@@ -14,6 +14,8 @@ import java.util.List;
 @RequestMapping("/ships")
 @RestController
 public class ShipRestController {
+
+
     @Autowired
     private ShipService shipService;
 
@@ -25,7 +27,6 @@ public class ShipRestController {
 
     @GetMapping("/{id}")
     public Ship findShipById(@PathVariable("id") Long id) {
-        //return shipService.findById(id).orElseThrow(()->new RuntimeException());
         return shipService.findById(id).get();
     }
 }
