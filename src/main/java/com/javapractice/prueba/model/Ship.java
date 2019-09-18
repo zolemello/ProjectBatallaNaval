@@ -25,14 +25,15 @@ public class Ship {
     }
 
 
-    public Ship(Long id, GamePlayer gamePlayerId, String shipType, Set <String> shipLocations) {
-        this.id = id;
+    public Ship(GamePlayer gamePlayerId, String shipType, Set <String> shipLocations) {
+
         this.gamePlayerId = gamePlayerId;
         this.shipType = shipType;
         this.shipLocations = shipLocations;
     }
 
 
+  //GETTERS Y SETTERS
 
     public Long getId() {
         return id;
@@ -70,10 +71,10 @@ public class Ship {
     @Override
     public String toString() {
         return "Ship{" +
-                "id=" + id +
-                ", gamePlayerId=" + gamePlayerId +
-                ", shipType=" + shipType +
-                ", shipLocations=" + shipLocations +
+                "id=" + id + '\n' +
+                ", gamePlayerId=" + gamePlayerId + '\'' +
+                ", shipType=" + shipType + '\'' +
+                ", shipLocations=" + shipLocations + '\'' +
                 '}';
     }
 }

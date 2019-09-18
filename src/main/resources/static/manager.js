@@ -8,7 +8,7 @@ $(function() {
   // load and display JSON sent by server for /players
 
   function loadData() {
-    $.get("/player")
+    $.get("api/player")
     .done(function(data) {
       showOutput(JSON.stringify(data, null, 2));
     })
@@ -35,7 +35,7 @@ $(function() {
           'Content-Type': 'application/json'
       },
       dataType: "text",
-      url: "/player", //Le "pega" a la url con el metodo postmapping que hicimos en PlayRestController
+      url: "api/player", //Le "pega" a la url con el metodo postmapping que hicimos en PlayRestController
       data: JSON.stringify({ "userName": userName })
     })
     .done(function( ) {

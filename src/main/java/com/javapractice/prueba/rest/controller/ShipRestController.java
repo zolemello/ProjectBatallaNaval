@@ -30,3 +30,5 @@ public class ShipRestController {
         return shipService.findById(id).get();
     }
 }
+
+

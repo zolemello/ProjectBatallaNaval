@@ -73,10 +73,10 @@ public class GamePlayer {
     @Override
     public String toString() {
         return "Game{" +
-                "id=" + id +
-                ", creationDate=" + creationDate +
-                ", player=" + player +
-                ", game=" + game +
+                "id=" + id + '\'' +
+                ", creationDate=" + creationDate + '\'' +
+                ", player=" + player + '\'' +
+                ", game=" + game + '\'' +
                 '}';
     }
 }
