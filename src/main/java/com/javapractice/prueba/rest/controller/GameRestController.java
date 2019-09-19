@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("/game")
 @RestController
@@ -25,28 +26,20 @@ public class GameRestController {
             return gameService.findall();
         }
 
+        @GetMapping ("/ids")
+        public List <Long> findallids () {
+            return gameService.findall().stream().map(game -> game.getId()).collect(Collectors.toList());
+        }
+
+
         @GetMapping ("/{id}") // aca le dice que cualquier cosa que vaya despues de la barra que es un id
         public Game findGamebyId(@PathVariable ("id") Long id) {
             //aca arriba con el PathVariable setea el id, lo que viene de la linea de arriba lo poone aca?
             return gameService.findbyId(id).get();
         }
 
+
+
+
     }
 
-   /* @Autowired
-    private GameService gameService;
-
-    @GetMapping
-    public List<Game> findall() {
-        return gameService.findall();
-    }
-
-    @GetMapping("/{id}")
-    public Game findPlayerbyId(@PathVariable("id") Long id) {
-
-        return gameService.findbyId(id).get();
-    }
-
-    // en los controllers tengo la informacion, aca deberia  tener los juegos
-}
-*/
