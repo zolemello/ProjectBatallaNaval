@@ -19,4 +19,5 @@ fetch(url, request)
         console.log(error);
     })
 
-    function 
+
+
