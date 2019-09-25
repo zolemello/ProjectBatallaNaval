@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class GamePlayer {
@@ -25,17 +27,24 @@ public class GamePlayer {
         private Game game;
 //Esta parte es para conectar con el id de game y de player
 
+     // A game player has a set of ships.
+     //gamePlayer.getShips() should return a Set of ships
+
+        @OneToMany(fetch=FetchType.EAGER)
+        private Set<Ship> ships = new HashSet<>();
+
 
     public GamePlayer() {
 
     }
 
 
-    public GamePlayer(Long id, Date creationDate, Player player, Game game) {
+    public GamePlayer(Long id, Date creationDate, Player player, Game game, Set<Ship> ships) {
         this.id = id;
         this.creationDate = creationDate;
         this.player = player;
         this.game = game;
+        this.ships = ships;
     }
 
     public Long getId() {
@@ -68,6 +77,14 @@ public class GamePlayer {
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(Set<Ship> ships) {
+        this.ships = ships;
     }
 
     @Override
