@@ -11,7 +11,8 @@ public class Ship {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private GamePlayer gamePlayerId;
 
     private String shipType;
