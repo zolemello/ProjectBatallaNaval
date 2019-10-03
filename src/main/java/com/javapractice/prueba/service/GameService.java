@@ -13,7 +13,7 @@ public class GameService {
 
     @Autowired
     private GameRepository gameRepository;
-    public Optional<Game> findbyId(Long id) {
+    public Optional<Game> findById(Long id) {
         return gameRepository.findById(id);
     }
 
@@ -22,3 +22,4 @@ public class GameService {
     }
 
 }
+

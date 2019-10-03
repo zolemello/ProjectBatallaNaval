@@ -3,50 +3,35 @@ package com.javapractice.prueba.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class GamePlayer {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        @NotNull
-        @NotEmpty
-        private Date creationDate;
+    private Date joinDate;
 
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name="player_id")
-        private Player player;
+    @ManyToOne (fetch = FetchType.EAGER)
+    private Player player;
 
-        @ManyToOne(fetch = FetchType.EAGER)
-        @JoinColumn(name="game_id")
-        private Game game;
-//Esta parte es para conectar con el id de game y de player
+    @ManyToOne (fetch = FetchType.LAZY)
+    private Game game;
 
-     // A game player has a set of ships.
-     //gamePlayer.getShips() should return a Set of ships
+    @JoinColumn(name = "game_id")
+    @OneToMany (fetch=FetchType.EAGER)
+    private List<Ship> ships;
 
-        @OneToMany(fetch=FetchType.EAGER)
-        private Set<Ship> ships = new HashSet<>();
+    @OneToMany (fetch=FetchType.EAGER)
+    private List<Salvo> salvos;
 
-
+    //Empty Constructor
     public GamePlayer() {
-
     }
 
-
-    public GamePlayer(Long id, Date creationDate, Player player, Game game, Set<Ship> ships) {
-        this.id = id;
-        this.creationDate = creationDate;
-        this.player = player;
-        this.game = game;
-        this.ships = ships;
-    }
-
+    //Getters and Setters
     public Long getId() {
         return id;
     }
@@ -55,12 +40,12 @@ public class GamePlayer {
         this.id = id;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getJoinDate() {
+        return joinDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 
     public Player getPlayer() {
@@ -79,21 +64,26 @@ public class GamePlayer {
         this.game = game;
     }
 
-    public Set<Ship> getShips() {
+    public List<Ship> getShips() {
         return ships;
     }
 
-    public void setShips(Set<Ship> ships) {
+    public void setShips(List<Ship> ships) {
         this.ships = ships;
     }
 
-    @Override
-    public String toString() {
-        return "Game{" +
-                "id=" + id + '\'' +
-                ", creationDate=" + creationDate + '\'' +
-                ", player=" + player + '\'' +
-                ", game=" + game + '\'' +
-                '}';
+    public List<Salvo> getSalvos() {
+        return salvos;
+    }
+
+    public void setSalvos(List<Salvo> salvos) {
+        this.salvos = salvos;
+    }
+
+    public Map<String, Object> toDTO() {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("id", getId());
+        dto.put("player", getPlayer().toDTO());
+        return dto;
     }
 }

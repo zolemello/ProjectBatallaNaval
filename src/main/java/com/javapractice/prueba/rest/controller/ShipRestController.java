@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/ships")
+@RequestMapping("/ship")
 @RestController
 public class ShipRestController {
 
@@ -32,10 +32,6 @@ public class ShipRestController {
     }
 
 
-   // @RequestMapping("/game_view/{nn}")
-    //public Map<String, Object>(@PathVariable long nn)
-//    }
-
-    }
+}
 
 

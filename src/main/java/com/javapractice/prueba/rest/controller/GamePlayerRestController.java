@@ -35,7 +35,7 @@ public class GamePlayerRestController {
     @GetMapping("/{id}") // aca le dice que cualquier cosa que vaya despues de la barra que es un id
     public GamePlayer findPlayerbyId(@PathVariable("id") Long id) {
         //aca arriba con el PathVariable setea el id, lo que viene de la linea de arriba lo poone aca?
-        return gamePlayerService.findbyId(id).get();
+        return gamePlayerService.findById(id).get();
     }
 
     /*@PostMapping // esto crea ...algo VER ESTO

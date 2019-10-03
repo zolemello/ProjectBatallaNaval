@@ -8,14 +8,14 @@ import java.util.Set;
 public class Ship {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
-    private GamePlayer gamePlayerId;
+    private GamePlayer gamePlayer;
 
     private String shipType;
+
 
     @ElementCollection
     private Set<String> shipLocations;
@@ -26,9 +26,9 @@ public class Ship {
     }
 
 
-    public Ship(GamePlayer gamePlayerId, String shipType, Set <String> shipLocations) {
+    public Ship(GamePlayer gamePlayer, String shipType, Set <String> shipLocations) {
 
-        this.gamePlayerId = gamePlayerId;
+        this.gamePlayer = gamePlayer;
         this.shipType = shipType;
         this.shipLocations = shipLocations;
     }
@@ -44,12 +44,12 @@ public class Ship {
         this.id = id;
     }
 
-    public GamePlayer getGamePlayerId() {
-        return gamePlayerId;
+    public GamePlayer getGamePlayer() {
+        return gamePlayer;
     }
 
-    public void setGamePlayerId(GamePlayer gamePlayerId) {
-        this.gamePlayerId = gamePlayerId;
+    public void setGamePlayer(GamePlayer gamePlayer) {
+        this.gamePlayer = gamePlayer;
     }
 
     public String getShipType() {
@@ -73,7 +73,7 @@ public class Ship {
     public String toString() {
         return "Ship{" +
                 "id=" + id + '\n' +
-                ", gamePlayerId=" + gamePlayerId + '\'' +
+                ", gamePlayer=" + gamePlayer + '\'' +
                 ", shipType=" + shipType + '\'' +
                 ", shipLocations=" + shipLocations + '\'' +
                 '}';

@@ -14,7 +14,7 @@ public class GamePlayerService {
     private GamePlayerRepository gamePlayerRepository;
 
 
-    public Optional<GamePlayer> findbyId(Long id) {
+    public Optional<GamePlayer> findById(Long id) {
         return gamePlayerRepository.findById(id);
     }
 

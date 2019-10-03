@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Long> {
-    List<Player> findByUsername (String username);
+    List<Player> findByUserName (String username);
 }
