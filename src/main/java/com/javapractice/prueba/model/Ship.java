@@ -2,9 +2,7 @@ package com.javapractice.prueba.model;
 
 import javax.persistence.*;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Ship {
@@ -19,7 +17,7 @@ public class Ship {
     private String shipType;
 
     @ElementCollection
-    private Set<String> shipLocations;
+    private List<String> shipLocations = new ArrayList<>();
 
 
 
@@ -27,7 +25,7 @@ public class Ship {
     }
 
 
-    public Ship(GamePlayer gamePlayer, String shipType, Set <String> shipLocations) {
+    public Ship(GamePlayer gamePlayer, String shipType, List <String> shipLocations) {
 
         this.gamePlayer = gamePlayer;
         this.shipType = shipType;
@@ -61,11 +59,11 @@ public class Ship {
         this.shipType = shipType;
     }
 
-    public Set<String> getShipLocations() {
+    public List<String> getShipLocations() {
         return shipLocations;
     }
 
-    public void setShipLocations(Set<String> shipLocations) {
+    public void setShipLocations(List<String> shipLocations) {
         this.shipLocations = shipLocations;
     }
 

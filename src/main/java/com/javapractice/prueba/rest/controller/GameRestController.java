@@ -87,9 +87,9 @@ public class GameRestController {
         Map<String, Object> dto = new LinkedHashMap<>();
 
         if (gamePlayer != null) {
-            dto.put("id", gamePlayer.getGame().getId() + '\n');
+            dto.put("id", gamePlayer.getGame().getId());
             dto.put("created", gamePlayer.getGame().getCreationDate());
-            dto.put("gamePlayers", gamePlayer.getPlayer());
+            dto.put("gamePlayer", gamePlayer.getGame().getGamePlayers().stream().map(GamePlayer::gamePlayerDTO));
             dto.put("ships", gamePlayer.getShips().stream().map(Ship::shipDTO));
             //return dto;
         } else {
