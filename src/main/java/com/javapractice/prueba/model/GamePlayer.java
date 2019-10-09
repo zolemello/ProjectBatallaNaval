@@ -1,8 +1,8 @@
 package com.javapractice.prueba.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
@@ -12,19 +12,20 @@ public class GamePlayer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date joinDate;
+    private Date creationDate;
 
     @ManyToOne (fetch = FetchType.EAGER)
     private Player player;
 
     @ManyToOne (fetch = FetchType.LAZY)
+    @JsonIgnore
     private Game game;
 
     @JoinColumn(name = "game_id")
-    @OneToMany (fetch=FetchType.EAGER)
+    @OneToMany (fetch=FetchType.LAZY)
     private List<Ship> ships;
 
-    @OneToMany (fetch=FetchType.EAGER)
+    @OneToMany (fetch=FetchType.LAZY)
     private List<Salvo> salvos;
 
     //Empty Constructor
@@ -40,12 +41,12 @@ public class GamePlayer {
         this.id = id;
     }
 
-    public Date getJoinDate() {
-        return joinDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Player getPlayer() {
@@ -80,10 +81,10 @@ public class GamePlayer {
         this.salvos = salvos;
     }
 
-    public Map<String, Object> toDTO() {
+    public Map<String, Object> gamePlayerDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", getId());
-        dto.put("player", getPlayer().toDTO());
+        dto.put("player", getPlayer().playerDTO());
         return dto;
     }
 }

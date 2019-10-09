@@ -73,9 +73,9 @@ public class Game {
                 '}';
     }*/
 
-    public Map<String, Object> toDTO() {
+    public Map<String, Object> gameDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
-        Stream<Map<String, Object>> gamePlayerDTO = getGamePlayers().stream().map(GamePlayer::toDTO);
+        Stream<Map<String, Object>> gamePlayerDTO = getGamePlayers().stream().map(GamePlayer::gamePlayerDTO);
         //Stream<Map<String, Object>> shipDTO = getShips().stream().map(Ship::toDTO);
         dto.put("id", getId());
         dto.put("creationDate", getCreationDate());

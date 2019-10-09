@@ -26,13 +26,9 @@ public class Player {
     @Column(unique = true)
     private String userName;
 
-    @NotNull
-    @NotEmpty
-    private String password;
+    //private Date lastLogin;
 
-    private Date lastLogin;
-
-    @OneToMany (fetch=FetchType.EAGER)
+    @OneToMany (fetch=FetchType.LAZY)
     private Set<GamePlayer> gamePlayers;
 
     //Empty Constructor
@@ -46,7 +42,6 @@ public class Player {
         this.userName = userName;
     }
 
-    //Getters and Setters
     public Long getId() {
         return id;
     }
@@ -79,50 +74,6 @@ public class Player {
         this.userName = userName;
     }
 
-
-
-    //@Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    //@Override
-    public String getUsername() {
-        return this.userName;
-    }
-
-    //@Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    //@Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    //@Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    //@Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(Date lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
     }
@@ -131,10 +82,10 @@ public class Player {
         this.gamePlayers = gamePlayers;
     }
 
-    public Map<String, Object> toDTO() {
+    public Map<String, Object> playerDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
-        dto.put("id", getId());
-        dto.put("email", getUserName());
+        dto.put("id", this.getId());
+        dto.put("email", this.getUserName());
         return dto;
     }
 

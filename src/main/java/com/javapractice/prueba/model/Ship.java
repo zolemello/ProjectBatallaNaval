@@ -2,6 +2,8 @@ package com.javapractice.prueba.model;
 
 import javax.persistence.*;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -11,11 +13,10 @@ public class Ship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private GamePlayer gamePlayer;
 
     private String shipType;
-
 
     @ElementCollection
     private Set<String> shipLocations;
@@ -68,7 +69,7 @@ public class Ship {
         this.shipLocations = shipLocations;
     }
 
-    //to String Method
+    /*//to String Method
     @Override
     public String toString() {
         return "Ship{" +
@@ -77,6 +78,14 @@ public class Ship {
                 ", shipType=" + shipType + '\'' +
                 ", shipLocations=" + shipLocations + '\'' +
                 '}';
+    }*/
+
+
+    public Map<String, Object> shipDTO(){
+        Map<String, Object> dto = new LinkedHashMap<>();
+        dto.put("type", this.getShipType());
+        dto.put("locations", this.getShipLocations());
+        return dto;
     }
 }
 

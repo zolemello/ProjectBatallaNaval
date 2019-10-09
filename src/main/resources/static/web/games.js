@@ -10,7 +10,7 @@ $(function() {
   // load and display JSON sent by server for /api/game
 
   function loadData() {
-    $.get("api/game")
+    $.get("/api/game")
     .done(function(data) {
       showOutput(JSON.stringify(data, null, 2));
     })
