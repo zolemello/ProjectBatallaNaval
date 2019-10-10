@@ -12,13 +12,15 @@ public class Ship {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="gamePlayer_id")
     private GamePlayer gamePlayer;
 
     private String shipType;
 
     @ElementCollection
+    @Column(name = "LOCATIONS")
+    @CollectionTable(name = "SHIP_LOCATIONS", joinColumns = {@JoinColumn(name = "SHIP_ID")})
     private List<String> shipLocations = new ArrayList<>();
-
 
 
     public Ship() {

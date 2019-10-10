@@ -6,8 +6,10 @@ import com.javapractice.prueba.model.Game;
 import com.javapractice.prueba.model.GamePlayer;
 import com.javapractice.prueba.model.Ship;
 import com.javapractice.prueba.repository.GamePlayerRepository;
+import com.javapractice.prueba.repository.ShipRepository;
 import com.javapractice.prueba.service.GamePlayerService;
 import com.javapractice.prueba.service.GameService;
+import com.javapractice.prueba.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,10 +33,17 @@ public class GameRestController {
     @Autowired
     private GamePlayerService gamePlayerService;
 
+    @Autowired
+    private ShipRepository shipRepository;
+
+    @Autowired
+    private ShipService shipService;
+
     public void setGamePlayerRepository(GamePlayerRepository gamePlayerRepository) {
         this.gamePlayerRepository = gamePlayerRepository;
     }
 
+    public ShipRepository getShipRepository() {return shipRepository;}
     public GamePlayerRepository getGamePlayerRepository() {
         return gamePlayerRepository;
     }
@@ -78,11 +87,22 @@ public class GameRestController {
     }
 
     // DE LA TAREA 3
+    /*
+    private List<Map> shipsList(List<Ship> ships) {
+        return ships.stream()
+                .map(ship -> ship.shipDTO())
+                .collect(Collectors.toList());
+    }
+*/
+
+
     @RequestMapping("/game_view/{gamePlayerId}")
     public Map<String, Object> getGameView(@PathVariable("gamePlayerId") Long gamePlayerId) {
         Game game = gameService.findById(gamePlayerId).orElse(null); //orElseThrow(() -> new GameNotFoundException(gamePlayerId));
         // ESTO NSTANCIA UN NUEVO JUEGO Y ME TRAE A TRAVES DEL SERVICE TODOS LOS ID QUE ME HAYAN LLLEGADO. CREEO.
         GamePlayer gamePlayer = gamePlayerService.findById(gamePlayerId).orElse(null);//orElseThrow(() -> new GameNotFoundException(gamePlayerId));
+        Ship ship = shipService.findById(gamePlayerId).orElse(null);
+
 
         Map<String, Object> dto = new LinkedHashMap<>();
 
@@ -91,9 +111,9 @@ public class GameRestController {
             dto.put("created", gamePlayer.getGame().getCreationDate());
             dto.put("gamePlayer", gamePlayer.getGame().getGamePlayers().stream().map(GamePlayer::gamePlayerDTO));
             dto.put("ships", gamePlayer.getShips().stream().map(Ship::shipDTO));
-            //return dto;
-        } else {
-            dto.put("ERROR", "NOPE, NO EXISTE ESE PLAYER.  ");}
+
+             } else {
+            dto.put(" ERROR ", " NOPE, NO EXISTE ESE PLAYER.  ");}
 
             return dto;
 
