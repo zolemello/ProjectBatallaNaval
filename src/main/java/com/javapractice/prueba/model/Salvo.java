@@ -1,6 +1,9 @@
 package com.javapractice.prueba.model;
 
 import javax.persistence.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Salvo {
@@ -9,28 +12,34 @@ public class Salvo {
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id; //A database-generated ID, as with Ship
-        @ManyToOne
+
+       @ManyToOne(fetch = FetchType.EAGER)
+       @JoinColumn(name = "gamePlayer_id")
         private GamePlayer gamePlayerId; // A GamePlayer
-        private Integer turnNumber; //A turn number
-        private String locations;  //A list of locations
+
+        private Integer turn; //A turn number
+
+        @ElementCollection
+        @Column(name = "location")
+        private List<String> locations;  //A list of locations
 
 
         public Salvo() {
         }
 
 
-        public Salvo(Long id, GamePlayer gamePlayerId, Integer turnNumber, String locations) {
+        public Salvo(Long id, GamePlayer gamePlayerId, Integer turn, List <String> locations) {
             this.id = id;
             this.gamePlayerId = gamePlayerId;
-            this.turnNumber = turnNumber;
+            this.turn = turn;
             this.locations = locations;
         }
 
-    public String getLoctions() {
+    public List<String> getLoctions() {
         return locations;
     }
 
-    public void setLocations(String loctions) {
+    public void setLocations(List<String> loctions) {
         this.locations = loctions;
     }
 
@@ -50,12 +59,12 @@ public class Salvo {
             this.gamePlayerId = gamePlayerId;
         }
 
-        public Integer getTurnNumber() {
-            return turnNumber;
+        public Integer getTurn() {
+            return turn;
         }
 
-        public void setTurnNumber(Integer turnNumber) {
-            this.turnNumber = turnNumber;
+        public void setTurn(Integer turn) {
+            this.turn = turn;
         }
 
         //toString Method
@@ -64,10 +73,20 @@ public class Salvo {
             return "Salvo{" +
                     "id=" + id +
                     ", gamePlayerId=" + gamePlayerId +
-                    ", turnNumber=" + turnNumber +
+                    ", turn=" + turn +
                     ", locations=" + locations +
                     '}';
         }
+
+
+    public Map<String, Object> salvoDTO() {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("turn number", this.getTurn());
+        dto.put("player", this.getGamePlayerId().getPlayer().getId());
+        dto.put("locations", this.getLoctions());
+        return dto;
     }
+
+}
 
 
