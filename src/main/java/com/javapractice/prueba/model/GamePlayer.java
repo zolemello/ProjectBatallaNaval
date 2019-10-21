@@ -85,6 +85,15 @@ public class GamePlayer {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", getId());
         dto.put("player", getPlayer().playerDTO());
+
+        //AGREGADO PARA TAREA 5
+        Score score = this.getPlayer().getScoreByGame(this.getGame());
+        if (score != null)
+            dto.put("score", score.getPoints());
+        else
+            dto.put("score", null);
+
+
         return dto;
     }
 }

@@ -1,4 +1,4 @@
-table {
+/*table {
     width: 90%;
 }
 
@@ -23,4 +23,10 @@ td .content {
     left: 0;
     right: 0;
     background: gray;
+}*/
+
+players-data {
+font-style = bold;
+size:12px;
+position: center;
 }

@@ -31,15 +31,20 @@ public class Player {
     @OneToMany (fetch=FetchType.LAZY)
     private Set<GamePlayer> gamePlayers;
 
+    //AGREGADO PARA LA TAREA 5
+    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Score> scores = new HashSet<>();
+
     //Empty Constructor
     public Player() {
     }
 
     //Constructor with parameters
-    public Player(String firstName, String lastName, String userName) {
+    public Player(String firstName, String lastName, String userName, Set scores) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
+        this.scores = scores;
     }
 
     public Long getId() {
@@ -82,11 +87,32 @@ public class Player {
         this.gamePlayers = gamePlayers;
     }
 
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
+    }
+
+
+
+
+    //ESTE OBTIENE LOS SSCORES DE UN DETERMINADO JUEGO QUE LO BUSCA POR ID Y SI NO LO ENCENTRA DICE QUE ES NULL
+    public Score getScoreByGame(Game game) {
+        return this.scores.stream()
+                .filter(score -> score.getGame().getId() == game.getId())
+                .findFirst()
+                .orElse(null);
+    }
+
+
     public Map<String, Object> playerDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", this.getId());
         dto.put("email", this.getUserName());
         return dto;
     }
+
 
 }

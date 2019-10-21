@@ -10,18 +10,19 @@ public class Salvo {
 
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id; //A database-generated ID, as with Ship
 
        @ManyToOne(fetch = FetchType.EAGER)
-       @JoinColumn(name = "gamePlayer_id")
-        private GamePlayer gamePlayerId; // A GamePlayer
+       @JoinColumn(name = "GAME_PLAYER_ID")
+        private GamePlayer gamePlayer; // A GamePlayer
 
         private Integer turn; //A turn number
 
         @ElementCollection
-        @Column(name = "location")
-        private List<String> locations;  //A list of locations
+        @Column(name = "LOCATIONS")
+        @CollectionTable(name = "SALVO_LOCATIONS", joinColumns = {@JoinColumn(name = "SALVO_ID")})
+       private List<String> locations;  //A list of locations
 
 
         public Salvo() {
@@ -30,7 +31,7 @@ public class Salvo {
 
         public Salvo(Long id, GamePlayer gamePlayerId, Integer turn, List <String> locations) {
             this.id = id;
-            this.gamePlayerId = gamePlayerId;
+            this.gamePlayer = gamePlayerId;
             this.turn = turn;
             this.locations = locations;
         }
@@ -51,12 +52,12 @@ public class Salvo {
             this.id = id;
         }
 
-        public GamePlayer getGamePlayerId() {
-            return gamePlayerId;
+        public GamePlayer getGamePlayer() {
+            return gamePlayer;
         }
 
-        public void setGamePlayerId(GamePlayer gamePlayerId) {
-            this.gamePlayerId = gamePlayerId;
+        public void setGamePlayer(GamePlayer gamePlayer) {
+            this.gamePlayer = gamePlayer;
         }
 
         public Integer getTurn() {
@@ -72,7 +73,7 @@ public class Salvo {
         public String toString() {
             return "Salvo{" +
                     "id=" + id +
-                    ", gamePlayerId=" + gamePlayerId +
+                    ", gamePlayer=" + gamePlayer +
                     ", turn=" + turn +
                     ", locations=" + locations +
                     '}';
@@ -82,7 +83,7 @@ public class Salvo {
     public Map<String, Object> salvoDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("turn number", this.getTurn());
-        dto.put("player", this.getGamePlayerId().getPlayer().getId());
+        dto.put("player", this.getGamePlayer().getPlayer().getId());
         dto.put("locations", this.getLoctions());
         return dto;
     }

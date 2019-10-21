@@ -36,13 +36,13 @@
      // genera el HTML de las columnas
      function getColumnsHtmlForShips(i, locations, color) {
          let html = "";
-         debugger;
+         //debugger;
          for (let j = 0; j < numbers.length; j++) {
              let cellColor = "lightblue";
              let text= "";
              for (let k = 0; k < locations.length; k++) {
                  if (locations[k] == letters[i] + numbers[j]) {
-                     debugger
+                     //debugger
                      cellColor = color;
                      for(let l = 0; l< salvoLocationsEnemy.length; l ++) {
                          if(salvoLocationsEnemy[l].location == letters[i] + numbers[j]){
@@ -92,13 +92,13 @@
      // dibuja la grilla de barcos
      function renderShipTable(shipLocations) {
          renderHeaders("ship-grid-numbers");
-         renderRows(shipLocations, "ship-grid-rows", "gray", getColumnsHtmlForShips);
+         renderRows(shipLocations, "ship-grid-rows", "darkblue", getColumnsHtmlForShips);
      }
 
      // dibuja la grilla de salvos
      function renderSalvoTable(salvoLocations) {
          renderHeaders("salvo-grid-numbers");
-         renderRows(salvoLocations, "salvo-grid-rows", "orange", getColumnsHtmlForSalvo);
+         renderRows(salvoLocations, "salvo-grid-rows", "red", getColumnsHtmlForSalvo);
      }
 
      // muestra los datos de los jugadores de la partida
@@ -111,20 +111,24 @@
          if (gamePlayer1.id == urlParams.get('gp')) {
              thisPlayer = gamePlayer1.player.email;
              otherPlayer = gamePlayer2.player.email;
+
          } else {
              thisPlayer = gamePlayer2.player.email;
              otherPlayer = gamePlayer1.player.email;
          }
-         document.getElementById("players-data").innerHTML = "You: " + thisPlayer + " vs Your Adversary:  " + otherPlayer;
+         document.getElementById("players-data").innerHTML = "You:" + thisPlayer + " vs Your Adversary:  " + otherPlayer;
      }
 
      // recibe los datos del gameplayer y setea en el array locations las posiciones de todos los barcos del jugador
      function setShipLocations(data) {
-         debugger
+         //debugger
          mappedLocations = data.ships.map(function (ship) {
              return ship.locations
          });
          shipLocations = [].concat.apply([], mappedLocations);
+
+
+
      }
 
      // recibe los datos del gameplayer y setea en el array locations las posiciones de todos los salvos lanzados
@@ -135,8 +139,10 @@
                  valueToReturn.push({location: item, turno: salvo.turn});
              });
              return valueToReturn;
-         });
+        });
          salvoLocations = [].concat.apply([], mappedLocations);
+
+
      }
 
      function setSalvoLocationsEnemy(data) {
@@ -162,7 +168,7 @@
                  renderSalvoTable(salvoLocations);
              })
              .fail(function (jqXHR, textStatus) {
-                 alert("Failed: " + textStatus);
+                 alert("NO FUNCA! :(  " + textStatus);
              });
      }
 

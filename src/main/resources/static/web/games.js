@@ -15,7 +15,7 @@ $(function() {
       showOutput(JSON.stringify(data, null, 2));
     })
     .fail(function( jqXHR, textStatus ) {
-      showOutput( "Failed: Mensaje de error " + textStatus );
+      showOutput( "Error: NO FUNCA " + textStatus );
     });
   }
 
