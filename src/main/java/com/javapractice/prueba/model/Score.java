@@ -77,6 +77,14 @@ import java.util.Date;
         public void setGame(Game game) {
             this.game = game;
         }
+		
+		 public Map<String, Object> scoreDTO() {
+        Map<String, Object> dto = new LinkedHashMap<>();
+
+        dto.put("points", this.getPoints());
+		dto.put("finish date", this.getFinishDate()); 
+        return dto;
+    }
 
 
      }
