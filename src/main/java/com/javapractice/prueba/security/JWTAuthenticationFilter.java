@@ -83,7 +83,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         //Obtengo el player que estoy intentando que se autentique
         Optional<Player> player = playerRepository
-                .findFirstByEmail(((Player) auth.getPrincipal()).getUserName());
+                .findFirstByUserName(((Player) auth.getPrincipal()).getUserName());
 
         //Si encontre uno ejecuto le setteo el ultimo logueo
         if (player.isPresent()) {

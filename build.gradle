@@ -31,19 +31,18 @@ bootRun {
 }*/
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
-	//Agregado luego
-	compile 'com.auth0:java-jwt:3.4.0'
-	implementation 'org.springframework.boot:spring-boot-starter-security'	
-	testCompile 'com.google.code.gson:gson:2.8.5'	
-	testImplementation 'org.springframework.security:spring-security-test'
-	
-	}
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		compileOnly 'org.projectlombok:lombok'
+		developmentOnly 'org.springframework.boot:spring-boot-devtools'
+		runtimeOnly 'com.h2database:h2'
+		annotationProcessor 'org.projectlombok:lombok'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+		/*Estas lineas las agregamos ahora*/
+		compile 'com.auth0:java-jwt:3.4.0'
+		implementation 'org.springframework.boot:spring-boot-starter-security'
+		testCompile 'com.google.code.gson:gson:2.8.5'
+		testImplementation 'org.springframework.security:spring-security-test'
+}
