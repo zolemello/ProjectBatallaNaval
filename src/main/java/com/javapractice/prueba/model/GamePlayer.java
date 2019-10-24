@@ -3,7 +3,10 @@ package com.javapractice.prueba.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class GamePlayer {

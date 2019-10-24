@@ -1,8 +1,10 @@
 package com.javapractice.prueba.model;
 
 import javax.persistence.*;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Ship {

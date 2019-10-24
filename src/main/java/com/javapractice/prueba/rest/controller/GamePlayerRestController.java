@@ -2,8 +2,10 @@ package com.javapractice.prueba.rest.controller;
 
 
 import com.javapractice.prueba.model.GamePlayer;
+import com.javapractice.prueba.model.Player;
 import com.javapractice.prueba.model.Salvo;
 import com.javapractice.prueba.model.Ship;
+import com.javapractice.prueba.repository.PlayerRepository;
 import com.javapractice.prueba.service.GamePlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequestMapping("/gameplayer")
@@ -23,10 +22,19 @@ public class GamePlayerRestController {
 
     @Autowired
     private GamePlayerService gamePlayerService;
+
+    private PlayerRepository playerRepository;
     /*esta conectando el servicio con el controlador? */
+
 
     public GamePlayerService getGamePlayerService() {
         return gamePlayerService;
+    }
+
+    public PlayerRepository getPlayerRepository() { return playerRepository;}
+
+    public void setPlayerRepository (PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
     }
 
     public void setGamePlayerService(GamePlayerService gamePlayerService) {
@@ -73,10 +81,33 @@ public class GamePlayerRestController {
                 .collect(Collectors.toList());
     }
 
-    private List<Map> salvoesList(List<Salvo> salvoes) {
+    private List<Map> salvoesList( List<Salvo> salvoes) {
         return salvoes.stream()
                 .map(salvo -> salvo.salvoDTO())
                 .collect(Collectors.toList());
+    }
+
+    private List<Player> getAllPlayers(){
+        return playerRepository.findAll();
+    }
+
+    @RequestMapping("/leaderboard")
+    public List<Map<String,Object>> getScoreView(){
+        List<Map<String,Object>> leaderboard = new ArrayList<>();
+        this.getAllPlayers().forEach(player -> {
+            if(!player.getScores().isEmpty()) {
+                Map<String, Object> dto = new LinkedHashMap<>();
+                Map<String, Object> dtoScore = new LinkedHashMap<>();
+                dtoScore.put("total", player.getTotalPoints());
+                dtoScore.put("won", player.getWons());
+                dtoScore.put("lost", player.getLosses());
+                dtoScore.put("tied", player.getTies());
+                //dto.put("name",player.getEmail());
+                dto.put("score",dtoScore);
+                leaderboard.add(dto);
+            }
+        });
+        return leaderboard;
     }
 
 }

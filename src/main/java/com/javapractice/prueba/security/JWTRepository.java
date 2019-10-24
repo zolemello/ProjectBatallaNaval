@@ -1,8 +1,15 @@
 package com.javapractice.prueba.security;
 
+import com.auth0.jwt.JWT;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.javapractice.prueba.security.SecurityConstants.EXPIRATION_TIME;
+import static com.javapractice.prueba.security.SecurityConstants.SECRET;
+
 
 public class JWTRepository {
     public static final JWTRepository instance = new JWTRepository();

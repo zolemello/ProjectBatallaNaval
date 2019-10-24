@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.javapractice.prueba.security.SecurityConstants.HEADER_STRING;
+import static com.javapractice.prueba.security.SecurityConstants.TOKEN_PREFIX;
+
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);

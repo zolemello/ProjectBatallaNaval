@@ -160,6 +160,7 @@
      function loadData() {
          $.get("http://localhost:8080/api/gameplayer/game_view/" + urlParams.get('gp'))
              .done(function (data) {
+                 debugger;
                  setShipLocations(data);
                  setSalvoLocations(data);
                  setSalvoLocationsEnemy(data);

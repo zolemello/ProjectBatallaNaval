@@ -1,18 +1,12 @@
 package com.javapractice.prueba.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import javax.persistence.*;
-
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 @Entity
-
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,19 +16,9 @@ public class Player {
 
     private String lastName;
 
-    @NotNull
-    @NotEmpty
-    @Column(unique = true)
     private String userName;
 
-    @NotNull
-    @NotEmpty
-    @Column(unique = true)
-    private String email;
 
-    private String name;
-
-    @NotNull
     @NotEmpty
     private String password;
 
@@ -109,22 +93,6 @@ public class Player {
     }
 
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -133,7 +101,9 @@ public class Player {
         this.password = password;
     }
 
+    public void setLastLogin(Date date) {
 
+    }
 
     //ESTE OBTIENE LOS SCORES DE UN DETERMINADO JUEGO QUE LO BUSCA POR ID Y SI NO LO ENCENTRA DICE QUE ES NULL
     public Score getScoreByGame(Game game) {
@@ -185,7 +155,7 @@ public class Player {
         Integer totalTie = this.getTies().size();
 		
 		dto.put("id: ", this.getId());
-        dto.put("email: ", this.getUserName());
+        dto.put("userName: ", this.getUserName());
 		
 		dto.put("won: ", totalWon);
         dto.put("lose: ", totaLose);

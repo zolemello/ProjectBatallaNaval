@@ -1,7 +1,6 @@
 package com.javapractice.prueba.security;
 
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javapractice.prueba.model.Player;
 import com.javapractice.prueba.repository.PlayerRepository;
@@ -26,6 +25,8 @@ import java.util.Optional;
 
 import static com.javapractice.prueba.security.SecurityConstants.HEADER_STRING;
 import static com.javapractice.prueba.security.SecurityConstants.TOKEN_PREFIX;
+
+// import static <<package name>>.<<type name>>.<<static member name>>;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
@@ -58,7 +59,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             // Llamamos al authentication manager para que nos autentique... de onda ;). Lo pasamos como UsernamePasswordAuthentication token, porque, por lo general, lo tiene definido de esa forma. Implementa una interfaz llamada Authentication.
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            player.getEmail(),
+                            player.getUserName(),
                             player.getPassword(),
                             new ArrayList<>())
             );
@@ -82,7 +83,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         //Obtengo el player que estoy intentando que se autentique
         Optional<Player> player = playerRepository
-                .findFirstByEmail(((Player) auth.getPrincipal()).getEmail());
+                .findFirstByEmail(((Player) auth.getPrincipal()).getUserName());
 
         //Si encontre uno ejecuto le setteo el ultimo logueo
         if (player.isPresent()) {

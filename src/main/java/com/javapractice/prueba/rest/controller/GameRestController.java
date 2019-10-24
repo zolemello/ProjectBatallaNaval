@@ -11,12 +11,16 @@ import com.javapractice.prueba.service.GamePlayerService;
 import com.javapractice.prueba.service.GameService;
 import com.javapractice.prueba.service.ShipService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @RequestMapping("/game")
 @RestController
