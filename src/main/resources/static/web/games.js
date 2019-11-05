@@ -20,6 +20,23 @@ $(function() {
   }
 
   loadData();
+
+//Leaderboard info
+
+fetch("/api/leaderboard")
+.then(res => res.json())
+.then(json => {
+console.log(json);
+    app.leaderboard = json
+})
+var app = new Vue({
+    el: "#app",
+    data: {
+        games: [],
+        leaderboard:[]
+    }
+});
+
 });
 
 

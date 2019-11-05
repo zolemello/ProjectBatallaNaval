@@ -1,5 +1,9 @@
 package com.javapractice.prueba.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -13,25 +17,31 @@ public class Ship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="gamePlayer_id")
     private GamePlayer gamePlayer;
 
     private String shipType;
 
+
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<String> shipLocations = new ArrayList<>();
+
+   /* @ElementCollection
     @Column(name = "LOCATIONS")
     @CollectionTable(name = "SHIP_LOCATIONS", joinColumns = {@JoinColumn(name = "SHIP_ID")})
     private List<String> shipLocations = new ArrayList<>();
-
+*/
 
     public Ship() {
     }
 
 
-    public Ship(GamePlayer gamePlayer, String shipType, List <String> shipLocations) {
+    public Ship( String shipType, List <String> shipLocations) {
 
-        this.gamePlayer = gamePlayer;
+
         this.shipType = shipType;
         this.shipLocations = shipLocations;
     }

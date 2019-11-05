@@ -57,16 +57,19 @@ public class GamePlayerRestController {
     public Map<String, Object> getGameView(@PathVariable Long gamePlayerID) {
         GamePlayer gamePlayer = gamePlayerService.findById(gamePlayerID).orElseThrow(RuntimeException::new);
         Map<String, Object> dto = new LinkedHashMap<>();
+
+
         dto.put("id", gamePlayer.getGame().getId());
         dto.put("created", gamePlayer.getGame().getCreationDate());
         dto.put("gamePlayers", gamePlayerList(gamePlayer.getGame().getGamePlayers()));
         dto.put("ships", shipsList(gamePlayer.getShips()));
         dto.put("salvoes", salvoesList(gamePlayer.getSalvos()));
         dto.put("enemySalvoes", salvoesList(gamePlayer.getGame().getGamePlayers().stream()
-                .filter(gp -> !gp.getId().equals(gamePlayerID)).findFirst()
-                .orElseThrow(() -> new RuntimeException()).getSalvos()));
+              .filter(gp -> !gp.getId().equals(gamePlayerID)).findFirst()
+            .orElseThrow(() -> new RuntimeException()).getSalvos()));
+
         return dto;
-    }
+            }
 
 
     private List<Map> gamePlayerList(Set<GamePlayer> gamePlayers) {

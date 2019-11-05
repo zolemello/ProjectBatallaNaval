@@ -1,9 +1,13 @@
 package com.javapractice.prueba.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -11,16 +15,17 @@ import static java.util.stream.Collectors.toList;
 @Entity //Una entidad es una tabla de una base de datos.
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native" , strategy = "native")
     private Long id;
-    @NotNull
-    @NotEmpty
+
+
     //private Date creationDate;
     //Date es el tipo de dato de creationDate
-    private Date creationDate;
+    @NotNull
+    private LocalDateTime creationDate;
 
-    @JoinColumn (name="game_id")
-    @OneToMany (fetch = FetchType.EAGER)
+    @OneToMany (mappedBy="game", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<GamePlayer> gamePlayers;
 
 
@@ -28,13 +33,13 @@ public class Game {
 
     }
 
-    public Game (Date date) {
+    public Game (LocalDateTime date) {
         this.creationDate = date;
     }
 
 
 
-    public Game(Long id, Date creationDate) {
+    public Game(Long id, LocalDateTime creationDate) {
         this.id = id;
         this.creationDate = creationDate;
     }
@@ -48,11 +53,11 @@ public class Game {
         this.id = id;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -75,15 +80,14 @@ public class Game {
 
     public Map<String, Object> gameDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
-        Stream<Map<String, Object>> gamePlayerDTO = getGamePlayers().stream().map(GamePlayer::gamePlayerDTO);
-        //Stream<Map<String, Object>> shipDTO = getShips().stream().map(Ship::toDTO);
+        //Stream<Map<String, Object>> gamePlayerDTO = getGamePlayers().stream().map(GamePlayer::gamePlayerDTO);
         dto.put("id", getId());
         dto.put("creationDate", getCreationDate());
-        dto.put("gamePlayers", gamePlayerDTO.collect(toList()));
+        dto.put("gamePlayers", this.getGamePlayers().stream().map(GamePlayer::gamePlayerDTO).collect(Collectors.toList()));
         //Obtengo el stream de gamePlayers. Lo transformo a  Stream<Set<Ship>>. Con flatMap lo transformo a un Stream<Ship> y lo
         //collecto con forma de lista.
-        List<Ship> result = gamePlayers.stream().map(GamePlayer::getShips).flatMap(Collection::stream).collect(toList());
-        dto.put("ships", result);
+        //List<Ship> result = gamePlayers.stream().map(GamePlayer::getShips).flatMap(Collection::stream).collect(toList());
+        //dto.put("ships", result);
         return dto;
     }
 

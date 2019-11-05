@@ -3,6 +3,7 @@ package com.javapractice.prueba.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Map;
         @GenericGenerator(name = "native", strategy = "native")
         private long id;
 
-        private Date finishDate;
+        private LocalDateTime finishDate;
 
         private int points;
 
@@ -33,12 +34,12 @@ import java.util.Map;
         public Score() {
         }
 
-        public Score(int points, Game game, Player player, Date finishDate) {
-            this.points = points;
-            this.game = game;
-            this.player = player;
-            this.finishDate = finishDate;
-        }
+    public Score(int points, Game game, Player player, LocalDateTime finishDate) {
+        this.points = points;
+        this.game = game;
+        this.player = player;
+        this.finishDate = finishDate;
+    }
 
         public long getId() {
             return id;
@@ -56,11 +57,11 @@ import java.util.Map;
             this.points = points;
         }
 
-        public Date getFinishDate() {
+        public LocalDateTime getFinishDate() {
             return finishDate;
         }
 
-        public void setFinishDate(Date finishDate) {
+        public void setFinishDate(LocalDateTime finishDate) {
             this.finishDate = finishDate;
         }
 

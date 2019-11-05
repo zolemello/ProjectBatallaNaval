@@ -31,7 +31,6 @@ public class Player {
     private String password;
 
 
-
     @OneToMany(mappedBy = "player", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<GamePlayer> gamePlayers;
 
@@ -44,11 +43,11 @@ public class Player {
     }
 
     //Constructor with parameters
-    public Player(String firstName, String lastName, String userName, Set scores) {
+    public Player(String userName, String firstName, String lastName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.scores = scores;
+        this.password = password;
     }
 
     public Long getId() {
@@ -170,12 +169,12 @@ public class Player {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
 		
 		Integer totalWon = this.getWons().size();
-        Integer totaLose = this.getLosses().size();
+        Integer totalLose = this.getLosses().size();
         Integer totalTie = this.getTies().size();
 		dto.put("id: ", this.getId());
         dto.put("username: ", this.getUserName());
 		dto.put("won: ", totalWon);
-        dto.put("lose: ", totaLose);
+        dto.put("lose: ", totalLose);
         dto.put("tie: ", totalTie);
         dto.put("total: ", this.getTotalPoints());
 		

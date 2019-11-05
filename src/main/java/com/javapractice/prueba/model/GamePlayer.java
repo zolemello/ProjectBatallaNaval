@@ -1,38 +1,55 @@
 package com.javapractice.prueba.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 public class GamePlayer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
+    @JsonIgnore
     @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "player_id")
     private Player player;
 
-    @ManyToOne (fetch = FetchType.LAZY)
     @JsonIgnore
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_id")
     private Game game;
 
-    @JoinColumn(name = "game_id")
+   /* @JoinColumn(name = "game_id")
     @OneToMany (fetch=FetchType.LAZY)
     private List<Ship> ships;
 
     @OneToMany (fetch=FetchType.LAZY)
     private List<Salvo> salvos;
+*/
+
+    @OneToMany(mappedBy = "gamePlayer", cascade = CascadeType.ALL)
+    private List<Ship> ships = new ArrayList<>();
+
+    @OneToMany(mappedBy = "gamePlayer", cascade = CascadeType.ALL)
+    private List<Salvo> salvos = new ArrayList<Salvo>();
+
 
     //Empty Constructor
     public GamePlayer() {
+    }
+
+    public GamePlayer(Game game, Player player, LocalDateTime creationDate) {
+        this.game = game;
+        this.player = player;
+        this.creationDate = creationDate;
     }
 
     //Getters and Setters
@@ -44,11 +61,11 @@ public class GamePlayer {
         this.id = id;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -83,6 +100,18 @@ public class GamePlayer {
     public void setSalvos(List<Salvo> salvos) {
         this.salvos = salvos;
     }
+
+    //METODOS
+    public void addShip(Ship ship) {
+        this.ships.add(ship);
+        ship.setGamePlayer(this);
+    }
+
+    public void addSalvo(Salvo salvo) {
+        this.salvos.add(salvo);
+        salvo.setGamePlayer(this);
+    }
+
 
     public Map<String, Object> gamePlayerDTO() {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();

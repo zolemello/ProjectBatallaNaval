@@ -25,10 +25,10 @@ repositories {
 }
 
 //AGREGUE ESTO LUNES 26
-/*
+
 bootRun {
-    addResources = true
-}*/
+    sourceResources sourceSets.main
+}
 
 dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

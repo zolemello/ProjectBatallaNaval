@@ -109,12 +109,12 @@
          let gamePlayer2 = data.gamePlayers[1];
          // según el ID del gameplayer actual asigna thisPlayer al jugador correspondiente, otherPlayer al contrincante
          if (gamePlayer1.id == urlParams.get('gp')) {
-             thisPlayer = gamePlayer1.player.email;
-             otherPlayer = gamePlayer2.player.email;
+             thisPlayer = gamePlayer1.player.firstName;
+             otherPlayer = gamePlayer2.player.firstName;
 
          } else {
-             thisPlayer = gamePlayer2.player.email;
-             otherPlayer = gamePlayer1.player.email;
+             thisPlayer = gamePlayer2.player.firstName;
+             otherPlayer = gamePlayer1.player.firstName;
          }
          document.getElementById("players-data").innerHTML = "You:" + thisPlayer + " vs Your Adversary:  " + otherPlayer;
      }
@@ -158,7 +158,7 @@
 
      // carga los datos del gameplayer según el parámetro 'gp' en la URL y llama a los métodos que dibujan la grilla
      function loadData() {
-         $.get("http://localhost:8080/api/gameplayer/game_view/" + urlParams.get('gp'))
+         $.get("/api/gameplayer/game_view/" + urlParams.get('gp'))
              .done(function (data) {
                  debugger;
                  setShipLocations(data);
@@ -170,6 +170,7 @@
              })
              .fail(function (jqXHR, textStatus) {
                  alert("NO FUNCA! :(  " + textStatus);
+                 // renderTable();
              });
      }
 
